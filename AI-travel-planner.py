@@ -5,21 +5,8 @@ import streamlit as st
 API_KEY = "AIzaSyApvjwVTxEGd9uSgDVf-fIGBSvtuQL625Y"
 genai.configure(api_key=API_KEY)
 
-# Get available models dynamically
-def get_available_model():
-    try:
-        models = genai.list_models()
-        for model in models:
-            if "gemini" in model.name:  # Use the latest available Gemini model
-                return model.name
-        return None  # No valid model found
-    except Exception as e:
-        st.error(f"⚠️ Error fetching available models: {e}")
-        return None
-
-MODEL_NAME = get_available_model()
-if MODEL_NAME is None:
-    st.error("❌ No valid Gemini model found. Please check your API key or account access.")
+# Set model explicitly to gemini-1.5-flash
+MODEL_NAME = "gemini-1.5-flash"
 
 # Application Title
 st.title("🌍 AI-Powered Travel Itinerary Planner")
@@ -46,8 +33,6 @@ additional_details = st.text_area("Any extra details? (Optional)")
 if st.button("Generate Itinerary"):
     if not destination or not preferences or not purpose:
         st.error("❌ Please provide the destination, purpose, and preferences for your trip.")
-    elif MODEL_NAME is None:
-        st.error("❌ No valid AI model available. Try again later.")
     else:
         user_input = (
             f"You are an AI travel planner. Plan a {duration}-day trip to {destination} with a {budget} budget. "
@@ -61,7 +46,7 @@ if st.button("Generate Itinerary"):
 
         with st.spinner("Generating your personalized itinerary..."):
             try:
-                # Generate response using Gemini AI
+                # Generate response using Gemini AI (1.5 Flash model)
                 model = genai.GenerativeModel(MODEL_NAME)
                 response = model.generate_content(user_input)
 
