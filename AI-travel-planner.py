@@ -2,7 +2,7 @@ import google.generativeai as genai
 import streamlit as st
 
 # Configure Gemini API key
-genai.configure(api_key="AIzaSyAaP6FLcEXSFWUmh44zRUr2fBx-K0UQ7f4")
+genai.configure(api_key="AIzaSyApvjwVTxEGd9uSgDVf-fIGBSvtuQL625Y")
 
 # Application Title
 st.title("🌍 AI-Powered Travel Itinerary Planner")
