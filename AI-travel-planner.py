@@ -88,7 +88,7 @@ if st.button("Generate Itinerary"):
     with st.spinner("Generating your personalized itinerary..."):
         try:
             # Generate response using Gemini AI
-            model = genai.GenerativeModel("gemini-pro")
+            model = genai.GenerativeModel("gemini-pro-1")
             response = model.generate_content(user_input)
 
             st.subheader("Your Personalized Itinerary")
